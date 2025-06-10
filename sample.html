@@ -13,8 +13,10 @@
 
     /* initialize jsPsych */
     var jsPsych = initJsPsych({
+        override_safe_mode: true,
       on_finish: function() {
         jsPsych.data.displayData();
+
       }
     });
 
