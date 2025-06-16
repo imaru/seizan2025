@@ -4,6 +4,7 @@
 <head>
     <title>My experiment</title>
     <script src="https://unpkg.com/jspsych@8.2.1"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-canvas-button-response@2.1.0"></script>
@@ -102,14 +103,15 @@
 
     /* define welcome message trial */
     var welcome = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: "Welcome to the experiment. Press any key to begin."
+        type: jsPsychHtmlButtonResponse,
+        stimulus: "準備ができたら下のボタンを押してください",
+        choices: ['スタート']
     };
     timeline.push(welcome);
 
     /* define instructions trial */
     var instructions = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: jsPsychHtmlButtonResponse,
         stimulus: `
         <p>In this experiment, a circle will appear in the center 
         of the screen.</p><p>If the circle is <strong>blue</strong>, 
@@ -149,7 +151,7 @@
             return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 1000, 1250, 1500, 1750, 2000], 1)[0];
         },
         data: {
-            task: 'fixation'
+            task:['fixation']
         }
     };
 
@@ -195,7 +197,7 @@
 
     /* define debrief */
     var debrief_block = {
-        type: jsPsychHtmlKeyboardResponse,
+        type: jsPsychHtmlButtonResponse,
         stimulus: function () {
 
             var trials = jsPsych.data.get().filter({ task: 'response' });
@@ -207,7 +209,8 @@
           <p>Your average response time was ${rt}ms.</p>
           <p>Press any key to complete the experiment. Thank you!</p>`;
 
-        }
+        },
+        choise: ['次へ']
     };
     timeline.push(debrief_block);
 
