@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-canvas-button-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-button-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
     <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
 </head>
@@ -24,6 +25,11 @@
             jsPsych.data.displayData();
         }
     });
+
+    
+    const subject_id = jsPsych.randomization.randomID(10);
+    const filename = `${subject_id}.csv`;
+            
 
     function drawTri(c) {
         var ctx = c.getContext('2d');
@@ -168,6 +174,15 @@
         }
     };
 
+    
+    const save_data = {
+        type: jsPsychPipe,
+        action: "save",
+        experiment_id: "iqgCEKzYqfq6",
+        filename: filename,
+        data_string: ()=>jsPsych.data.get().csv()
+    };
+
     var cvstest = {
         type: jsPsychCanvasButtonResponse,
         canvas_size: [hgt, wid],
@@ -215,7 +230,7 @@
     timeline.push(debrief_block);
 
     /* start the experiment */
-    jsPsych.run(timeline);
+    jsPsych.run(timeline, save_data);
 
 </script>
 
