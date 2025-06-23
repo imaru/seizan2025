@@ -216,13 +216,23 @@
         stimulus: function () {
 
             var trials = jsPsych.data.get().filter({ task: 'response' });
+            var c_trials = jsPsych.data.get().filter({ task: 'response', cond: 0 });
+            var ic_trials = jsPsych.data.get().filter({ task: 'response', cond: 1 });
             var correct_trials = trials.filter({ correct: true });
+            var c_correct_trials = c_trials.filter({ correct: true });
+            var ic_correct_trials = ic_trials.filter({ correct: true });
             var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
+            var c_accuracy = Math.round(c_correct_trials.count() / c_trials.count() * 100);
+            var ic_accuracy = Math.round(ic_correct_trials.count() / ic_trials.count() * 100);
             var rt = Math.round(correct_trials.select('rt').mean());
+            var c_rt = Math.round(c_correct_trials.select('rt').mean());
+            var ic_rt = Math.round(ic_correct_trials.select('rt').mean());
 
-            return `<p>You responded correctly on ${accuracy}% of the trials.</p>
-          <p>Your average response time was ${rt}ms.</p>
-          <p>Press any key to complete the experiment. Thank you!</p>`;
+            return `<p>一致試行の正答率は ${c_accuracy}% でした</p>
+          <p>一致試行の反応時間は ${c_rt}msでした</p>
+          <p>不一致試行の正答率は ${ic_accuracy}% でした</p>
+          <p>不一致試行の反応時間は ${ic_rt}msでした</p>
+          <p>次へを押してください。ご参加ありがとうございました！</p>`;
 
         },
         choices: ['次へ']
