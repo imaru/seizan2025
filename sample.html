@@ -12,6 +12,14 @@
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
     <link href="https://unpkg.com/jspsych@8.2.1/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+        .jspsych-btn {
+        padding: 20px 20px;
+        font-size: 25px;
+        gap: 300px;
+        border-color: black;
+        }
+    </style>
 </head>
 
 <body></body>
@@ -151,7 +159,7 @@
     /* define fixation and test trials */
     var fixation = {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<div style="font-size:60px;">+</div>',
+        stimulus: '<div style="font-size:60px;">+</div><br><br><br><br><br>',
         choices: "NO_KEYS",
         trial_duration: function () {
             return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 1000, 1250, 1500, 1750, 2000], 1)[0];
@@ -187,7 +195,7 @@
         type: jsPsychCanvasButtonResponse,
         canvas_size: [hgt, wid],
         stimulus: jsPsych.timelineVariable('stimulus'),
-        choices: ['左','右'],
+        choices: ['〇','◎'],
         correct_response: jsPsych.timelineVariable('correct_response'),
         data: {
             task: 'response',
