@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-canvas-button-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-canvas-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-button-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
     <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
@@ -72,6 +73,10 @@
 
     function putLL(c){
         var ctx = c.getContext('2d');
+        ctx.font = '60px Roboto medium';
+        ctx.textAlign = 'center',
+        ctx.textBaseline = 'middle',
+        ctx.fillText('+', wid/2, hgt/2);
         var img = new Image();
         img.src = 'img/left.png';
         img.onload = () =>{
@@ -81,15 +86,24 @@
 
     function putLR(c){
         var ctx = c.getContext('2d');
+        ctx.font = '60px Roboto medium';
+        ctx.textAlign = 'center',
+        ctx.textBaseline = 'middle',
+        ctx.fillText('+', wid/2, hgt/2);
         var img = new Image();
         img.src = 'img/left.png';
         img.onload = () =>{
             ctx.drawImage(img, wid-hgt,0,hgt, hgt);
         }
+        
     }
 
     function putRL(c){
         var ctx = c.getContext('2d');
+        ctx.font = '60px Roboto medium';
+        ctx.textAlign = 'center',
+        ctx.textBaseline = 'middle',
+        ctx.fillText('+', wid/2, hgt/2);
         var img = new Image();
         img.src = 'img/right.png';
         img.onload = () =>{
@@ -99,11 +113,23 @@
 
     function putRR(c){
         var ctx = c.getContext('2d');
+        ctx.font = '60px Roboto medium';
+        ctx.textAlign = 'center',
+        ctx.textBaseline = 'middle',       
+        ctx.fillText('+', wid/2, hgt/2);
         var img = new Image();
         img.src = 'img/right.png';
         img.onload = () =>{
             ctx.drawImage(img, wid-hgt,0,hgt, hgt);
         }
+    }
+
+    function putFix(c){
+        var ctx = c.getContext('2d');
+        ctx.font = '60px Roboto medium';
+        ctx.textAlign = 'center',
+        ctx.textBaseline = 'middle',
+        ctx.fillText('+', wid/2, hgt/2);
     }
     /* create timeline */
     var timeline = [];
@@ -169,6 +195,19 @@
         }
     };
 
+    var fixation2 = {
+        canvas_size: [hgt*2.11, wid],
+        type: jsPsychCanvasKeyboardResponse,
+        stimulus: putFix,
+        choices: "NO_KEYS",
+        trial_duration: function () {
+            return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 1000, 1250, 1500, 1750, 2000], 1)[0];
+        },
+        data:{
+            task:['fixation']
+        }
+    }
+
     var test = {
         type: jsPsychImageKeyboardResponse,
         stimulus: jsPsych.timelineVariable('stimulus'),
@@ -211,7 +250,7 @@
 
     /* define test procedure */
     var test_procedure = {
-        timeline: [fixation, cvstest],
+        timeline: [fixation2, cvstest],
         timeline_variables: tri_conditions,
         repetitions: 2,
         randomize_order: true
