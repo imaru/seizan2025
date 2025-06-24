@@ -25,7 +25,7 @@
 
 <body></body>
 <script>
-    var wid=300;
+    var wid=500;
     var hgt=100;
     /* initialize jsPsych */
     var jsPsych = initJsPsych({
@@ -77,11 +77,12 @@
         ctx.textAlign = 'center',
         ctx.textBaseline = 'middle',
         ctx.fillText('+', wid/2, hgt/2);
-        var img = new Image();
-        img.src = 'img/left.png';
-        img.onload = () =>{
-            ctx.drawImage(img, 0,0,hgt, hgt);
-        }
+        ctx.fillText('←', 30, hgt/2);
+        //var img = new Image();
+        //img.src = 'img/left.png';
+        //img.onload = () =>{
+        //    ctx.drawImage(img, 0,0,hgt, hgt);
+        //}
     }
 
     function putLR(c){
@@ -90,11 +91,12 @@
         ctx.textAlign = 'center',
         ctx.textBaseline = 'middle',
         ctx.fillText('+', wid/2, hgt/2);
-        var img = new Image();
-        img.src = 'img/left.png';
-        img.onload = () =>{
-            ctx.drawImage(img, wid-hgt,0,hgt, hgt);
-        }
+        ctx.fillText('←', wid-30, hgt/2);
+        //var img = new Image();
+        //img.src = 'img/left.png';
+        //img.onload = () =>{
+        //    ctx.drawImage(img, wid-hgt,0,hgt, hgt);
+        //}
         
     }
 
@@ -104,11 +106,12 @@
         ctx.textAlign = 'center',
         ctx.textBaseline = 'middle',
         ctx.fillText('+', wid/2, hgt/2);
-        var img = new Image();
-        img.src = 'img/right.png';
-        img.onload = () =>{
-            ctx.drawImage(img, 0,0,hgt, hgt);
-        }
+        ctx.fillText('→', 30, hgt/2)
+        //var img = new Image();
+        //img.src = 'img/right.png';
+        //img.onload = () =>{
+        //    ctx.drawImage(img, 0,0,hgt, hgt);
+        //}
     }
 
     function putRR(c){
@@ -117,11 +120,12 @@
         ctx.textAlign = 'center',
         ctx.textBaseline = 'middle',       
         ctx.fillText('+', wid/2, hgt/2);
-        var img = new Image();
-        img.src = 'img/right.png';
-        img.onload = () =>{
-            ctx.drawImage(img, wid-hgt,0,hgt, hgt);
-        }
+        ctx.fillText('→', wid-30, hgt/2);
+        //var img = new Image();
+        //img.src = 'img/right.png';
+        //img.onload = () =>{
+        //    ctx.drawImage(img, wid-hgt,0,hgt, hgt);
+        //}
     }
 
     function putFix(c){
@@ -234,7 +238,7 @@
         type: jsPsychCanvasButtonResponse,
         canvas_size: [hgt, wid],
         stimulus: jsPsych.timelineVariable('stimulus'),
-        choices: ['〇','◎'],
+        choices: ['←','→'],
         correct_response: jsPsych.timelineVariable('correct_response'),
         data: {
             task: 'response',
@@ -252,7 +256,7 @@
     var test_procedure = {
         timeline: [fixation2, cvstest],
         timeline_variables: tri_conditions,
-        repetitions: 2,
+        repetitions: 10,
         randomize_order: true
     };
     timeline.push(test_procedure);
