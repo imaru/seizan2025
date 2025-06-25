@@ -271,11 +271,11 @@
             var ic_accuracy = Math.round(ic_correct_trials.count() / ic_trials.count() * 100);
             var c_rt = Math.round(c_correct_trials.select('rt').mean());
             var ic_rt = Math.round(ic_correct_trials.select('rt').mean());
-            return `<p>属性条件です</p>
-            <p>一致試行の正答率は ${c_accuracy}% でした</p>
-          <p>一致試行の反応時間は ${c_rt}msでした</p>
-          <p>不一致試行の正答率は ${ic_accuracy}% でした</p>
-          <p>不一致試行の反応時間は ${ic_rt}msでした</p>
+            return `<p>向き条件です</p>
+            <p>A条件の正答率は ${c_accuracy}% でした</p>
+          <p>A条件の反応時間は ${c_rt}msでした</p>
+          <p>B条件の正答率は ${ic_accuracy}% でした</p>
+          <p>B条件の反応時間は ${ic_rt}msでした</p>
           <p>次へを押してください。ご参加ありがとうございました！</p>`;
         },
         choices: ['次へ']
