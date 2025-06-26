@@ -157,12 +157,11 @@
     var instructions = {
         type: jsPsychHtmlButtonResponse,
         stimulus: `
-        <p>この実験では、表示される矢印の位置を判断してもらいます。</p>
-        <p>矢印は画面中央の十字の左右どちらかに表示されます。</p>
-        <p>十字の左側だったら左側のボタンを、十字の右側だったら右側のボタンを、</p>
+        <p>この実験では、表示される矢印の向きを判断してもらいます。</p>
+        <p>矢印が左向きだったら左側のボタンを、右向きだったら右側のボタンを、</p>
         <p>できるだけ速く、でも間違えないように押してください。</p>
-            <p>この実験では、どちら向きの矢印かは関係ありません。</p>
-            <img src='img/inst_pos.png' width="500"></img>
+            <p>この実験では、矢印が表示される位置は関係ありません。</p>
+            <img src='img/inst_ori.png' width="500"></img>
       `,
         post_trial_gap: 1000,
         choices: ['次へ']
@@ -171,8 +170,8 @@
     timeline.push(welcome);
     var tri_conditions = [
         {stimulus: putLL, correct_response: 0, cnd: 0},
-        {stimulus: putLR, correct_response: 1, cnd: 1},
-        {stimulus: putRL, correct_response: 0, cnd: 1},
+        {stimulus: putLR, correct_response: 0, cnd: 1},
+        {stimulus: putRL, correct_response: 1, cnd: 1},
         {stimulus: putRR, correct_response: 1, cnd: 0}
     ];
 
@@ -246,7 +245,7 @@
     var test_procedure = {
         timeline: [fixation2, cvstest],
         timeline_variables: tri_conditions,
-        repetitions: 1,
+        repetitions: 10,
         randomize_order: true
     };
     timeline.push(test_procedure);
@@ -279,14 +278,14 @@
     var inputdata = {
         type: jsPsychHtmlButtonResponse,
         stimulus: `<p>こちらの<a href='https://kanazawait.qualtrics.com/jfe/form/SV_8oaQcvtt9onFCx8'>リンク先</a>から
-        結果を入力してください。今回の条件は<b>「位置条件」</b>です。</p>
+        結果を入力してください。今回の条件は<b>「向き条件1回目」</b>です。</p>
         <p>入力できたらこの実験は終了です。ご協力ありがとうございました。</p>`,
         choices: ['終了']
     };
     timeline.push(inputdata);
 
     /* start the experiment */
-    jsPsych.data.addProperties({condition: 'position'});
+    jsPsych.data.addProperties({condition: 'identity1'});
     jsPsych.run(timeline);
 
 </script>
